@@ -12,22 +12,18 @@ RUN apt-get install -y \
             lighttpd \
             php \
             php-cgi \
-            php-mysql \
-     && lighty-enable-mod \
-                     fastcgi \
-                     fastcgi-php
-
-#remove default html
-RUN rm /var/www/html/index.html
+            php-mysql 
+RUN lighty-enable-mod fastcgi \
+    && lighty-enable-mod fastcgi-php
 
 #reload lighttpd
-RUN service lighttpd force-reload
+RUN service lighttpd restart
 
 #copy test files
-COPY test.php dbconnect.php dbfetch.php /var/www/html/
+COPY test.php dbconnection.php dbfetch.php /var/www/html/
 
 RUN chmod +x /var/www/html/test.php \
-             /var/www/html/dbconnect.php \
+             /var/www/html/dbconnection.php \
              /var/www/html/dbfetch.php \
           && service lighttpd restart
 
