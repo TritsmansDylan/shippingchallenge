@@ -2,11 +2,11 @@
 
 The assignment
 
-? Create your own kubernetes stack with 1 worker
-? Containerized application for worker
-		? When the surname changes in DB, it changes for the webpage 			     automatically.
-		? When the layout changes, the worker will display the new layout                   		     automatically
-		? Use the webstack which is assigned to you
+-> Create your own kubernetes stack with 1 worker
+-> Containerized application for worker
+		-> When the surname changes in DB, it changes for the webpage automatically
+		-> When the layout changes, the worker will display the new layout automatically
+		-> Use the webstack which is assigned to you
 
 My webstack
 
@@ -21,17 +21,17 @@ Rancher
 
 How to earn points
 
-	? 0/20 – Be a plant
-          ?10/20 – stack in Docker
-          ? 14/20 – mk8s cluster with 1 worker
+	-> 0/20 – Be a plant
+        ->10/20 – stack in Docker
+        -> 14/20 – mk8s cluster with 1 worker
 
 Extra points
  
-	? Vagrant
-	? Extra worker
-	? Management webplatform for containers
-	? Something else than mk8s with the same purpose
-	? Be a funny guy
+	-> Vagrant
+	-> Extra worker
+	-> Management webplatform for containers
+	-> Something else than mk8s with the same purpose
+	-> Be a funny guy
  
 
 
@@ -77,29 +77,18 @@ EXPOSE 80
 CMD ["lighttpd", "-D", "-f","/etc/lighttpd/lighttpd.conf"]
 
 
-
-
-
-
-
-
-
-
-
 Steps
 
- ? Get the latest stable Ubuntu
- ?Set the timezone(precaution just in case, heard some webservices hate being in the                       wrong time zone) 
-? Update and upgrade everything
-? Install the essential software for my stack
-? Copy all the files needed
-? Make them executable
-? Open up port 80
-? run the lighttpd server
+-> Get the latest stable Ubuntu
+-> Set the timezone(precaution just in case, heard some webservices hate being in the wrong time zone) 
+-> Update and upgrade everything
+-> Install the essential software for my stack
+-> Copy all the files needed
+-> Make them executable
+-> Open up port 80
+-> run the lighttpd server
 
 Kubernetes
-
-I put all three of the needed parts (deployment, service and ingress) in one file for ease of use. Here are all three parts separated.
 
 Deployment
 
@@ -182,39 +171,48 @@ Installation
 
 Minikube
 
-? install Kubectl  https://kubernetes.io/docs/tasks/tools/install-kubectl/
-? install minikkube https://minikube.sigs.k8s.io/docs/start/
+-> install Kubectl  https://kubernetes.io/docs/tasks/tools/install-kubectl/
+-> install minikkube https://minikube.sigs.k8s.io/docs/start/
 
-? Fire up Minikube with its add-on ingress.
+-> Fire up Minikube with its add-on ingress.
 	minikube start
 	minikube addons enable ingress
+
 Shipping challenge
-? install mariadb using these commands:
+
+-> install mariadb using these commands:
 	$ sudo apt-get install software-properties-common
 	
 	$ sudo apt-key adv –fetch-keys 'https://mariadb.org/mariadb_release_signing_key.asc'
 
-	$ sudo add-apt-repository 'deb [arch=amd64,arm64,ppc64el] 	http://mirrors.piconets.webwerks.in/mariadb-mirror/repo/10.5/ubuntu focal main'
+	$ sudo add-apt-repository 'deb [arch=amd64,arm64,ppc64el] http://mirrors.piconets.webwerks.in/mariadb-mirror/repo/10.5/ubuntu focal main'
 
 	$ sudo apt update
 
 	$ sudo apt install mariadb-server
-? secure installation with the script provided using:
+
+-> secure installation with the script provided using:
 	$ sudo mysql_secure_installation
-? give yourself access to the database by following these steps:
-	? find the database config file and add this to the [mysqld] tag:
+
+-> give yourself access to the database by following these steps:
+
+	-> find the database config file and add this to the [mysqld] tag:
 		port = 3306
  		bind_address = 0.0.0.0
  		skip_name_resolve    
-	? log in to the database on the machine running it and use this command:
-		GRANT ALL ON database_name.* TO ‘your_username’@’%’ IDENTIFIED BY 		‘your_password’;
-? apply the yaml files on the machine running minikube with:
-		kubectl apply -f deployment.yaml
-		kubectl apply -f service.yaml
-		kubectl apply-f ingress.yaml
-? get the ingress ip address:
-		kubectl get ingress
-? add this ip to your host file:
+
+	-> log in to the database on the machine running it and use this command:
+		GRANT ALL ON database_name.* TO ‘your_username’@’%’ IDENTIFIED BY ‘your_password’;
+
+-> apply the yaml files on the machine running minikube with:
+	kubectl apply -f deployment.yaml
+	kubectl apply -f service.yaml
+	kubectl apply-f ingress.yaml
+
+-> get the ingress ip address:
+	kubectl get ingress
+
+-> add this ip to your host file:
 	example: 192.168.99.101	shippingchallenge.local
 	
 
