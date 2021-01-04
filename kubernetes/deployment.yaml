@@ -1,0 +1,52 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+   name:shippingchallenge-lighttpd
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: lighttpd
+  template:
+    metadata:
+      labels:
+        app: lighttpd
+  spec:
+    containers:
+      - name: lighttpd
+        image: tritsmansdylan/shippingchallenge
+        imagePullPolicy: Always
+        ports:
+          - containerPort: 80
+            name: lighttpd
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: shippingchallenge-service
+  labels:
+    app: lighttpd
+spec:
+  type: ClusterIP
+  ports:
+    - port: 80
+  selector:
+    app: lighttpd
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: shippingchallenge-ingress
+  namespace: default
+spec:
+  rules:
+    - host: shipping-challenge.local
+      http:
+        paths:
+          - path: /
+            pathtype: Prefix
+            backend:
+              service:
+                name: shippingchallenge-service
+                port:
+                  number: 80
