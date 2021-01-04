@@ -1,6 +1,6 @@
 <?php
 
-$server="localhost";
+$server="192.168.1.11";
 $username="root";
 $password="09Dylan04";
 $database="shippingchallenge";

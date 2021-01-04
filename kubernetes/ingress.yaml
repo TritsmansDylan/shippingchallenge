@@ -1,0 +1,17 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+    name: shippingchallenge-ingress
+    namespace: default
+spec:
+    rules:
+        - host: shippingchallenge.local
+          http:
+            paths:
+                - path: /
+                  pathType: Prefix
+                  backend:
+                    service:
+                        name: shippingchallenge-service
+                        port:
+                            number: 80
